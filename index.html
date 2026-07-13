@@ -6,6 +6,31 @@
     <title>Personal Portfolio Website - Easy Tutorials</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3f8f306265.js" crossorigin="anonymous"></script>
+    <style>
+        /* 🎛️ फ़िल्टर बटन्स के लिए कस्टम डिज़ाइन जो आपकी CSS थीम से मैच करेगा */
+        .skill-filters {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #262626;
+            color: #ababab;
+            border: 1px solid #ff004f;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff004f;
+            color: #fff;
+            box-shadow: 0 0 8px rgba(255, 0, 79, 0.4);
+        }
+    </style>
 </head>
 <body>
     <div id="header">
@@ -20,7 +45,6 @@
                     <li><a href="#contact">Contact</a></li>
                     <i class="fas fa-times" onclick="closemenu()"></i>
                 </ul>
-
                 <i class="fas fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
@@ -29,8 +53,9 @@
             </div>
         </div>
     </div>
+
     <!------------------about--------------->
-<div id="about">
+    <div id="about">
         <div class="container">
             <div class="row">
                 <div class="about-col-1">
@@ -48,19 +73,18 @@
                         <p class="tab-links" onclick="opentab('exprience')">Exprience</p>
                         <p class="tab-links" onclick="opentab('education')">Education</p>
                     </div>
-                    <!-- <div class="tab-contents active-tab" id="Skills">
-                        <ul>
-                            <li><span>UI/UX</span><br>Designing Web/App interfaces . Responsive UI/UX Design.</li>
-                            <li><span>Web Development</span><br>Web App Development . Frontend: React.js, HTML5, CSS, JavaScript (ES6+).</li>
-                            <li><span>Backend</span><br>Node.js, Express.js, RESTful APIs, JWT Authentication, Middleware. * Database: MongoDB, SQL, DBMS, Schema Design & Normalization </li>
-                            <li><span>App Development</span><br>Building Android/ios apps, Android App Development, MIT App Inventor, Rapid Prototyping AI & Additional Skills * AI & Agents: AI Agent Development, LLM APIs (OpenAI, Gemini/Claude), Agentic Workflows</li>
-                            <li><span>AI Tools</span><br>AI-Powered Website Building, Prompt Engineering, Automation Pipelines. </li>
-                        </ul>
-                    </div> -->
+
                     <div class="tab-contents active-tab" id="Skills">
-                        <!-- 🌐 लाइव स्किल्स यहाँ मर्न बैकएंड से अपने आप लोड होंगी -->
+                        <!-- 🎛️ स्किल्स फ़िल्टर बटन्स -->
+                        <div class="skill-filters">
+                            <button onclick="filterSkills('All', event)" class="btn filter-btn active">All</button>
+                            <button onclick="filterSkills('Frontend', event)" class="btn filter-btn">Frontend</button>
+                            <button onclick="filterSkills('Backend', event)" class="btn filter-btn">Backend</button>
+                            <button onclick="filterSkills('Database', event)" class="btn filter-btn">Database</button>
+                        </div>
+                        <!-- 🌐 लाइव स्किल्स यहाँ मर्न बैकएंड से लोड होंगी -->
                         <ul id="live-skills-container">
-                        <li><span>लोड हो रहा है...</span><br>डेटाबेस से स्किल्स ला रहे हैं...</li>
+                            <li><span>लोड हो रहा है...</span><br>डेटाबेस से स्किल्स ला रहे हैं...</li>
                         </ul>
                     </div>
 
@@ -84,7 +108,6 @@
     </div>
 
     <!-- -----------------------------services--------------------- -->
-
     <div id="services">
         <div class="container">
             <h1 class="sub-title">My Services</h1>
@@ -92,8 +115,7 @@
                 <div>
                     <i class="fa-solid fa-code"></i>
                     <h2>Web Design</h2>
-                    <p>
-                        Web design is the process of creating and arranging the visual elements, 
+                    <p>Web design is the process of creating and arranging the visual elements, 
                         layout, and overall aesthetics of a website. It encompasses various aspects of
                         design and functionality to ensure that a website is not only visually appealing
                         but also user-friendly and effective in conveying its purpose or message</p>
@@ -102,8 +124,7 @@
                 <div>
                     <i class="fas fa-crop-alt"></i>
                     <h2>UI/UX Design</h2>
-                    <p>
-                        UI (User Interface) design and UX (User Experience) design are two closely 
+                    <p>UI (User Interface) design and UX (User Experience) design are two closely 
                         related but distinct disciplines that play a crucial role in creating 
                         effective and user-friendly digital products, including websites, 
                         mobile apps, and software applications.</p>
@@ -113,9 +134,9 @@
                     <i class="fa-brands fa-app-store"></i>
                     <h2>App Design</h2>
                     <p>App design refers to the process of creating the user interface (UI) 
-                    and user experience (UX) for mobile applications (apps). It involves designing
-                    the visual elements, layout, functionality, and overall usability of an app to 
-                    ensure it provides a seamless and engaging experience for users. </p>
+                        and user experience (UX) for mobile applications (apps). It involves designing
+                        the visual elements, layout, functionality, and overall usability of an app to 
+                        ensure it provides a seamless and engaging experience for users. </p>
                     <a href="#">Learn more</a>
                 </div>
             </div>  
@@ -123,7 +144,6 @@
     </div>
 
     <!-- ---------------------portfolio------------ -->
-
     <div id="portfolio">
         <div class="container">
             <h1 class="sub-title">My Work</h1>
@@ -132,27 +152,24 @@
                     <img src="images/work-1.png">
                     <div class="layer">
                         <h3>Social Media App</h3>
-                        <p>The app connects you to the talented people around the world.
-                            Download it from play store.</p>
-                            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <p>The app connects you to the talented people around the world. Download it from play store.</p>
+                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
                 <div class="work">
                     <img src="images/work-2.png">
                     <div class="layer">
                         <h3>Music App</h3>
-                        <p>The app connects you to the talented people around the world.
-                            Download it from play store.</p>
-                            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <p>The app connects you to the talented people around the world. Download it from play store.</p>
+                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
                 <div class="work">
                     <img src="images/work-3.png">
                     <div class="layer">
-                        <h3>Online Shoping App</h3>
-                        <p>The app connects you to the talented people around the world.
-                            Download it from play store.</p>
-                            <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <h3>Online Shopping App</h3>
+                        <p>The app connects you to the talented people around the world. Download it from play store.</p>
+                        <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                     </div>
                 </div>
             </div>
@@ -167,7 +184,7 @@
                 <div class="contact-left">
                     <h1 class="sub-title">Contact Me</h1>
                     <p><i class="fa-solid fa-paper-plane"></i> aashutoshsoni2019@gmail.com</p>
-                    <p><i class="fa-solid fa-square-phone"></i></i>9755628076</p>
+                    <p><i class="fa-solid fa-square-phone"></i>9755628076</p>
                     <div class="social-icons">
                         <a href="https://www.facebook.com/aashutosh.soni.7921"><i class="fa-brands fa-facebook"></i></a>
                         <a href=""><i class="fa-brands fa-twitter-square"></i></a>
@@ -192,6 +209,7 @@
         </div>
     </div>
 
+    <!-- 📜 जावास्क्रिप्ट लॉजिक -->
     <script>
         var tablinks = document.getElementsByClassName("tab-links");
         var tabcontents = document.getElementsByClassName("tab-contents");
@@ -203,12 +221,12 @@
             for (tabcontent of tabcontents){
                 tabcontent.classList.remove("active-tab");
             }
-            event.currentTarget.classList.add("active-link");
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add("active-link");
+            }
             document.getElementById(tabname).classList.add("active-tab");
         }
-
     </script>
-
 
     <script>
         var sidemenu = document.getElementById("sidemenu");
@@ -220,6 +238,7 @@
             sidemenu.style.right = "-200px";
         }
     </script>
+
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzLzJHOisQbPMkrox1FzrwR83xizoBakEZJ7RwG4pvV-ZrUFt_ARQiciZyD7pzurO3g/exec'
         const form = document.forms['submit-to-google-sheet']
@@ -237,41 +256,17 @@
             })
             .catch(error => console.error('Error!', error.message))
         })
-      </script>
+    </script>
     
-      <script>
-        // 🌐 मर्न बैकएंड से लाइव स्किल्स लाकर पोर्टफोलियो में दिखाने का फंक्शन
+    <script>
+        let allSkillsData = [];
+
+        // 🌐 मर्न बैकएंड से लाइव स्किल्स लाने का फंक्शन
         async function fetchLiveSkills() {
             try {
                 const response = await fetch('https://my-skills-api-p955.onrender.com/api/skills/public');
-                const skills = await response.json();
-                
-                const container = document.getElementById('live-skills-container');
-                if(!container) return;
-                
-                // पुराना लोडिंग टेक्स्ट साफ़ करें
-                container.innerHTML = '';
-                
-                if (skills.length === 0) {
-                    container.innerHTML = '<li><span>No Skills</span><br>अभी कोई स्किल नहीं जोड़ी गई है।</li>';
-                    return;
-                }
-                
-                // डेटाबेस से आई हर स्किल को लूप चलाकर लिस्ट में जोड़ें
-                skills.forEach(skill => {
-                    const li = document.createElement('li');
-                    
-                    // स्टेटस और कैटेगरी के हिसाब से एक बढ़िया टैग टेक्स्ट सेट करना
-                    const statusTag = skill.status === 'Mastered' ? '🏆 Mastered' : '⚡ Learning';
-                    const categoryTag = skill.category ? `[${skill.category}]` : '[Frontend]';
-                    
-                    li.innerHTML = `
-                        <span>${skill.name}</span> <small style="color: #10b981; font-size: 11px; margin-left: 5px;">${categoryTag} ${statusTag}</small>
-                        <br>डैशबोर्ड से लाइव सिंक की गई स्किल।
-                    `;
-                    container.appendChild(li);
-                });
-                
+                allSkillsData = await response.json();
+                renderSkills(allSkillsData);
             } catch (error) {
                 console.error("स्किल्स लोड करने में दिक्कत आई:", error);
                 const container = document.getElementById('live-skills-container');
@@ -281,9 +276,49 @@
             }
         }
 
-        // पेज लोड होते ही लाइव डेटा लाएं
+        // 🎯 स्किल्स को स्क्रीन पर रेंडर करने का फंक्शन
+        function renderSkills(skills) {
+            const container = document.getElementById('live-skills-container');
+            if(!container) return;
+            
+            container.innerHTML = '';
+            
+            if (skills.length === 0) {
+                container.innerHTML = '<li><span>No Skills</span><br>इस कैटेगरी में कोई स्किल नहीं है।</li>';
+                return;
+            }
+            
+            skills.forEach(skill => {
+                const li = document.createElement('li');
+                const statusTag = skill.status === 'Mastered' ? '🏆 Mastered' : '⚡ Learning';
+                const categoryTag = skill.category ? `[${skill.category}]` : '[Frontend]';
+                
+                li.innerHTML = `
+                    <span>${skill.name}</span> <small style="color: #10b981; font-size: 11px; margin-left: 5px;">${categoryTag} ${statusTag}</small>
+                    <br>डैशबोर्ड से लाइव सिंक की गई स्किल।
+                `;
+                container.appendChild(li);
+            });
+        }
+
+        // 🔍 बटन क्लिक पर स्किल्स फ़िल्टर करने का फंक्शन
+        function filterSkills(category, e) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if(e && e.currentTarget) {
+                e.currentTarget.classList.add('active');
+            }
+
+            if (category === 'All') {
+                renderSkills(allSkillsData);
+            } else {
+                const filtered = allSkillsData.filter(skill => skill.category && skill.category.toLowerCase() === category.toLowerCase());
+                renderSkills(filtered);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', fetchLiveSkills);
     </script>
-
 </body>
 </html>

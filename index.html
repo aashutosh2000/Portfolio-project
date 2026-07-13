@@ -276,30 +276,43 @@
             }
         }
 
-        // 🎯 स्किल्स को स्क्रीन पर रेंडर करने का फंक्शन
-        function renderSkills(skills) {
-            const container = document.getElementById('live-skills-container');
-            if(!container) return;
-            
-            container.innerHTML = '';
-            
-            if (skills.length === 0) {
-                container.innerHTML = '<li><span>No Skills</span><br>इस कैटेगरी में कोई स्किल नहीं है।</li>';
-                return;
-            }
-            
-            skills.forEach(skill => {
-                const li = document.createElement('li');
-                const statusTag = skill.status === 'Mastered' ? '🏆 Mastered' : '⚡ Learning';
-                const categoryTag = skill.category ? `[${skill.category}]` : '[Frontend]';
-                
-                li.innerHTML = `
-                    <span>${skill.name}</span> <small style="color: #10b981; font-size: 11px; margin-left: 5px;">${categoryTag} ${statusTag}</small>
-                    <br>डैशबोर्ड से लाइव सिंक की गई स्किल।
-                `;
-                container.appendChild(li);
-            });
-        }
+        // 🎯 स्किल्स को स्क्रीन पर प्रोग्रेस बार के साथ रेंडर करने का फंक्शन
+function renderSkills(skills) {
+    const container = document.getElementById('live-skills-container');
+    if(!container) return;
+    
+    container.innerHTML = '';
+    
+    if (skills.length === 0) {
+        container.innerHTML = '<li><span>No Skills</span><br>इस कैटेगरी में कोई स्किल नहीं है।</li>';
+        return;
+    }
+    
+    skills.forEach(skill => {
+        const li = document.createElement('li');
+        li.style.listStyle = 'none';
+        li.style.marginBottom = '20px';
+        
+        // स्टेटस के हिसाब से प्रोग्रेस प्रतिशत और रंग तय करना
+        const isMastered = skill.status === 'Mastered';
+        const progressPercentage = isMastered ? 95 : 60; // Mastered के लिए 95%, Learning के लिए 60%
+        const barColor = isMastered ? '#ff004f' : '#10b981'; // Mastered के लिए गुलाबी/लाल, Learning के लिए हरा
+        const statusText = isMastered ? '🏆 Mastered' : '⚡ Learning';
+        const categoryTag = skill.category ? `[${skill.category}]` : '[Frontend]';
+        
+        li.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                <span style="font-weight: 500; font-size: 16px; color: #fff;">${skill.name}</span>
+                <small style="color: #ababab; font-size: 12px;">${categoryTag} ${statusText}</small>
+            </div>
+            <!-- 📊 प्रोग्रेस बार कंटेनर -->
+            <div style="width: 100%; background: #262626; height: 8px; border-radius: 4px; overflow: hidden; position: relative;">
+                <div style="width: ${progressPercentage}%; background: ${barColor}; height: 100%; border-radius: 4px; transition: width 0.5s ease-in-out;"></div>
+            </div>
+        `;
+        container.appendChild(li);
+    });
+}
 
         // 🔍 बटन क्लिक पर स्किल्स फ़िल्टर करने का फंक्शन
         function filterSkills(category, e) {

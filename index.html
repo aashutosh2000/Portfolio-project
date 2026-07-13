@@ -20,6 +20,7 @@
                     <li><a href="#contact">Contact</a></li>
                     <i class="fas fa-times" onclick="closemenu()"></i>
                 </ul>
+
                 <i class="fas fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
@@ -47,7 +48,7 @@
                         <p class="tab-links" onclick="opentab('exprience')">Exprience</p>
                         <p class="tab-links" onclick="opentab('education')">Education</p>
                     </div>
-                    <div class="tab-contents active-tab" id="Skills">
+                    <!-- <div class="tab-contents active-tab" id="Skills">
                         <ul>
                             <li><span>UI/UX</span><br>Designing Web/App interfaces . Responsive UI/UX Design.</li>
                             <li><span>Web Development</span><br>Web App Development . Frontend: React.js, HTML5, CSS, JavaScript (ES6+).</li>
@@ -55,7 +56,14 @@
                             <li><span>App Development</span><br>Building Android/ios apps, Android App Development, MIT App Inventor, Rapid Prototyping AI & Additional Skills * AI & Agents: AI Agent Development, LLM APIs (OpenAI, Gemini/Claude), Agentic Workflows</li>
                             <li><span>AI Tools</span><br>AI-Powered Website Building, Prompt Engineering, Automation Pipelines. </li>
                         </ul>
+                    </div> -->
+                    <div class="tab-contents active-tab" id="Skills">
+                        <!-- 🌐 लाइव स्किल्स यहाँ मर्न बैकएंड से अपने आप लोड होंगी -->
+                        <ul id="live-skills-container">
+                        <li><span>लोड हो रहा है...</span><br>डेटाबेस से स्किल्स ला रहे हैं...</li>
+                        </ul>
                     </div>
+
                     <div class="tab-contents" id="exprience">
                         <ul>
                             <li><span>Apr 2024 - Mar 2026 </span><br>Account Manager & Technical Trainer. Codevidhya </li>
@@ -230,6 +238,52 @@
             .catch(error => console.error('Error!', error.message))
         })
       </script>
+    
+      <script>
+        // 🌐 मर्न बैकएंड से लाइव स्किल्स लाकर पोर्टफोलियो में दिखाने का फंक्शन
+        async function fetchLiveSkills() {
+            try {
+                const response = await fetch('https://my-skills-api-p955.onrender.com/api/skills/public');
+                const skills = await response.json();
+                
+                const container = document.getElementById('live-skills-container');
+                if(!container) return;
+                
+                // पुराना लोडिंग टेक्स्ट साफ़ करें
+                container.innerHTML = '';
+                
+                if (skills.length === 0) {
+                    container.innerHTML = '<li><span>No Skills</span><br>अभी कोई स्किल नहीं जोड़ी गई है।</li>';
+                    return;
+                }
+                
+                // डेटाबेस से आई हर स्किल को लूप चलाकर लिस्ट में जोड़ें
+                skills.forEach(skill => {
+                    const li = document.createElement('li');
+                    
+                    // स्टेटस और कैटेगरी के हिसाब से एक बढ़िया टैग टेक्स्ट सेट करना
+                    const statusTag = skill.status === 'Mastered' ? '🏆 Mastered' : '⚡ Learning';
+                    const categoryTag = skill.category ? `[${skill.category}]` : '[Frontend]';
+                    
+                    li.innerHTML = `
+                        <span>${skill.name}</span> <small style="color: #10b981; font-size: 11px; margin-left: 5px;">${categoryTag} ${statusTag}</small>
+                        <br>डैशबोर्ड से लाइव सिंक की गई स्किल।
+                    `;
+                    container.appendChild(li);
+                });
+                
+            } catch (error) {
+                console.error("स्किल्स लोड करने में दिक्कत आई:", error);
+                const container = document.getElementById('live-skills-container');
+                if(container) {
+                    container.innerHTML = '<li><span>Error</span><br>लाइव स्किल्स लोड नहीं हो पाईं।</li>';
+                }
+            }
+        }
+
+        // पेज लोड होते ही लाइव डेटा लाएं
+        document.addEventListener('DOMContentLoaded', fetchLiveSkills);
+    </script>
 
 </body>
 </html>
